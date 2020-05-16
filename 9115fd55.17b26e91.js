@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[14],{147:function(a){a.exports=JSON.parse('{"allTagsPath":"/sage-time/blog/tags","slug":"facebook","name":"facebook","count":1,"permalink":"/sage-time/blog/tags/facebook"}')}}]);
