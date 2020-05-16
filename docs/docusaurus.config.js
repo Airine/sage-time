@@ -1,14 +1,14 @@
 module.exports = {
-  title: 'Project Name',
+  title: 'The Sage Time',
   tagline: 'Describe your project in one sentence.', // one sentence description
   url: 'https://blog.aaron-xin.tech/',
-  baseUrl: '/project-with-docs/',
+  baseUrl: '/sage-time/',
   favicon: 'img/favicon.ico',
   organizationName: 'Airine', // Usually your GitHub org/user name.
-  projectName: 'project-with-docs', // Usually your repo name.
+  projectName: 'sage-time', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'Project Name',
+      title: 'The Sage Time',
       logo: {
         alt: 'SUSTech CANStudio Logo',
         src: 'img/logo.svg',
@@ -20,10 +20,10 @@ module.exports = {
           label: 'Docs',
           position: 'left',
         },
-        {href: 'https://airine.github.io/blog', label: 'Blog', position: 'left'},
+        {href: 'https://blog.aaron-xin.tech/blog/sage-time', label: 'Blog', position: 'left'},
         {href: 'https://airine.github.io/', label: 'Home', position: 'right'},
         {
-          href: 'https://github.com/airine/project-with-docs',
+          href: 'https://github.com/airine/sage-time',
           label: 'GitHub',
           position: 'right',
         },
@@ -78,7 +78,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
-            'https://github.com/airine/project-with-docs/edit/master/docs/',
+            'https://github.com/airine/sage-time/edit/master/docs/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
