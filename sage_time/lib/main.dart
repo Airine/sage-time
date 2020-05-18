@@ -50,6 +50,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     ),
   ];
 
+  static const List<Color> _homeColors = <Color>[
+    Colors.black,
+    Colors.blue
+  ];
+
+  static const List<Color> _chartColors = <Color>[
+    Colors.blue,
+    Colors.black
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -77,6 +86,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('贤者时间'),
+        leading: Builder(builder: (context) {
+          return IconButton(
+            icon: Icon(Icons.dashboard, color: Colors.white),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+          );
+        }),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -90,11 +107,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             IconButton(
               icon: Icon(Icons.home),
               onPressed: _onHomePressed,
+              color: _homeColors[_selectedIndex],
             ),
             SizedBox(), //中间位置空出
             IconButton(
               icon: Icon(Icons.bubble_chart),
               onPressed: _onChartPressed,
+              color: _chartColors[_selectedIndex],
             ),
           ],
           mainAxisAlignment: MainAxisAlignment.spaceAround,
