@@ -51,13 +51,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   ];
 
   static const List<Color> _homeColors = <Color>[
-    Colors.black,
-    Colors.blue
+    Colors.blue,
+    Colors.black
   ];
 
   static const List<Color> _chartColors = <Color>[
-    Colors.blue,
-    Colors.black
+    Colors.black,
+    Colors.blue
   ];
 
   void _onItemTapped(int index) {
