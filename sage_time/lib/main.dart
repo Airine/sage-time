@@ -36,19 +36,13 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
-  int _clickTimes = 0;
+  static const List _tabs = [
+    ["主页", "日历", "列表"],
+    ["折线", "直方", "报告"]
+  ];
+  List tabs = _tabs[0];
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      '主页',
-      style: optionStyle,
-    ),
-    Text(
-      '分析',
-      style: optionStyle,
-    ),
-  ];
 
   static const List<Color> _homeColors = <Color>[
     Colors.blue,
@@ -63,6 +57,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      tabs = _tabs[index];
     });
   }
 
@@ -76,54 +71,93 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   }
 
   void _onAdd() {
-    setState(() {
-      _clickTimes += 1;
-    });
+    // TODO: implement onAdd
   }
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('贤者时间'),
-        leading: Builder(builder: (context) {
-          return IconButton(
-            icon: Icon(Icons.dashboard, color: Colors.white),
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
-            },
-          );
-        }),
-      ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      drawer: MyDrawer(),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
-        shape: CircularNotchedRectangle(),
-        child: Row(
-          children: [
-            IconButton(
-              icon: Icon(Icons.home),
-              onPressed: _onHomePressed,
-              color: _homeColors[_selectedIndex],
-            ),
-            SizedBox(), //中间位置空出
-            IconButton(
-              icon: Icon(Icons.bubble_chart),
-              onPressed: _onChartPressed,
-              color: _chartColors[_selectedIndex],
-            ),
-          ],
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return DefaultTabController(length: tabs.length,
+      child:
+        Scaffold(
+        appBar: AppBar(
+          title: const Text('贤者时间'),
+          leading: Builder(builder: (context) {
+            return IconButton(
+              icon: Icon(Icons.dashboard, color: Colors.white),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          }),
+          bottom:
+          TabBar(
+            tabs:
+//            (_selectedIndex == 0) ?
+            tabs.map((e) => Tab(text: e)).toList()
+//            _tabs.map((e) => Tab(text: e)).toList()
+          )
         ),
-      ),
-      floatingActionButton: FloatingActionButton( //悬浮按钮
-        child: Icon(Icons.add),
-        onPressed: _onAdd,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        body:
+          TabBarView(
+            children: tabs.map((e) { //创建3个Tab页
+              return Container(
+                alignment: Alignment.center,
+                child: Text(e, textScaleFactor: 5),
+              );
+            }).toList()
+          ),
+
+//        Builder(builder: (context){
+//          switch (_selectedIndex) {
+//            case 0:
+//              return TabBarView(
+//                children: tabs.map((e) { //创建3个Tab页
+//                  return Container(
+//                    alignment: Alignment.center,
+//                    child: Text(e, textScaleFactor: 5),
+//                  );
+//                }).toList()
+//              );
+//              break;
+//            default:
+//              return TabBarView(
+//                  children: _tabs.map((e) { //创建3个Tab页
+//                    return Container(
+//                      alignment: Alignment.center,
+//                      child: Text(e, textScaleFactor: 5),
+//                    );
+//                  }).toList()
+//              );
+//          }
+//        }),
+        drawer: MyDrawer(),
+        bottomNavigationBar: BottomAppBar(
+          color: Colors.white,
+          shape: CircularNotchedRectangle(),
+          child: Row(
+            children: [
+              IconButton(
+                icon: Icon(Icons.home),
+                onPressed: _onHomePressed,
+                color: _homeColors[_selectedIndex],
+              ),
+              SizedBox(), //中间位置空出
+              IconButton(
+                icon: Icon(Icons.bubble_chart),
+                onPressed: _onChartPressed,
+                color: _chartColors[_selectedIndex],
+              ),
+            ],
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          ),
+        ),
+        floatingActionButton: FloatingActionButton( //悬浮按钮
+          child: Icon(Icons.add),
+          onPressed: _onAdd,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      )
     );
   }
 }
