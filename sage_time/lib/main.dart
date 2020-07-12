@@ -11,6 +11,7 @@
 
 import 'package:flutter/material.dart';
 import 'my_drawer.dart';
+import 'bottom_sheet.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,25 +23,26 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
-      home: MyStatefulWidget(),
+      home: MainWidget(),
     );
   }
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  MyStatefulWidget({Key key}) : super(key: key);
+class MainWidget extends StatefulWidget {
 
   @override
-  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+  _MainWidgetState createState() => _MainWidgetState();
+
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _MainWidgetState extends State<MainWidget> {
+
   int _selectedIndex = 0;
+  List tabs = _tabs[0];
   static const List _tabs = [
     ["主页", "日历", "列表"],
     ["折线", "直方", "报告"]
   ];
-  List tabs = _tabs[0];
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
@@ -53,6 +55,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     Colors.black,
     Colors.blue
   ];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void _showBottomSheet(BuildContext context) {
+    Scaffold.of(context)
+      .showBottomSheet<void>(
+        (context) {
+          return MyBottom();
+      },
+      elevation: 25,
+    );
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -69,11 +86,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   void _onChartPressed() {
     _onItemTapped(1);
   }
-
-  void _onAdd() {
-    // TODO: implement onAdd
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -93,9 +105,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           bottom:
           TabBar(
             tabs:
-//            (_selectedIndex == 0) ?
             tabs.map((e) => Tab(text: e)).toList()
-//            _tabs.map((e) => Tab(text: e)).toList()
           )
         ),
         body:
@@ -107,30 +117,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               );
             }).toList()
           ),
-
-//        Builder(builder: (context){
-//          switch (_selectedIndex) {
-//            case 0:
-//              return TabBarView(
-//                children: tabs.map((e) { //创建3个Tab页
-//                  return Container(
-//                    alignment: Alignment.center,
-//                    child: Text(e, textScaleFactor: 5),
-//                  );
-//                }).toList()
-//              );
-//              break;
-//            default:
-//              return TabBarView(
-//                  children: _tabs.map((e) { //创建3个Tab页
-//                    return Container(
-//                      alignment: Alignment.center,
-//                      child: Text(e, textScaleFactor: 5),
-//                    );
-//                  }).toList()
-//              );
-//          }
-//        }),
         drawer: MyDrawer(),
         bottomNavigationBar: BottomAppBar(
           color: Colors.white,
@@ -152,10 +138,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
           ),
         ),
-        floatingActionButton: FloatingActionButton( //悬浮按钮
-          child: Icon(Icons.add),
-          onPressed: _onAdd,
-        ),
+        floatingActionButton:
+          Builder(builder: (BuildContext context) {
+            return FloatingActionButton( //悬浮按钮
+              child: Icon(Icons.add),
+              onPressed: () {
+                _showBottomSheet(context);
+              },
+            );
+          }),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       )
     );
