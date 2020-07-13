@@ -1,24 +1,16 @@
-# project-with-docs
+# sage_time
 
-## 文档
+A Flutter application - the sage time.
 
-_请熟悉[docusaurus]后再进行文档的修改和部署_
+## Getting Started
 
-1. 已部署的文档位于`gh-pages`分支
-    请不要修改`gh-pages`分支的任何内容，因为都是由`yarn deploy`命令生成的。
+This project is a starting point for a Flutter application.
 
-2. 先在本地`yarn start`确定无异常情况后`deploy`
+A few resources to get you started if this is your first Flutter project:
 
-### 文档修改部署
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-```bash
-cd docs
-```
-
-打开`docusaurus.config.js`
-
-1. 用搜索将 `Project Name` 换成项目名称。
-
-2. 用搜索将 `project-with-docs` 换成repo名称。
-
-### GitHub Actions
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
