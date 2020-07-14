@@ -100,7 +100,7 @@ class _MainWidgetState extends State<MainWidget> {
           body:
           TabBarView(
               children: tabs.map((e) { //创建3个Tab页
-                if (e == "主页") {
+                if (e == "列表") {
                   return HomeList();
                 }
                 return Container(
